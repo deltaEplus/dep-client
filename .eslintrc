@@ -19,7 +19,8 @@
       "error",
       2,
       {
-        "SwitchCase": 1
+        "SwitchCase": 1, 
+        "VariableDeclarator": 1 
       }
     ],
     "quotes": ["error", "single"],
@@ -30,6 +31,7 @@
         "devDependencies": true
       }
     ],
+    "default-param-last": 0,
     "linebreak-style": ["error", "unix"],
     "eol-last": ["error", "unix"],
     "comma-dangle": ["error", "never"],

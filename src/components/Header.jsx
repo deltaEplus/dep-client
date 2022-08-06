@@ -3,11 +3,12 @@ import React from 'react';
 import {
   Text, Image, Row, StatusBar
 } from 'native-base';
+import { bgColor } from '../config/theme';
 
 function AppHeader() {
   return (
     <Row
-      bg="rgb(249, 250, 250)"
+      bg={bgColor}
       px="1"
       py="3"
       justifyContent="space-between"
