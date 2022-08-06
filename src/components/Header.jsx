@@ -1,31 +1,26 @@
-import { View, Text, Image, StyleSheet } from "react-native";
-import logo from '../../assets/logo.png'
-const AppHeader = () => (
-    <View style={styles.appBarContainer}>
-     <Image style={styles.imageContainer} source={logo} />
-     <Text style={styles.title}>DeltaE+</Text>
-    </View>
-);
+/* eslint-disable global-require */
+import React from 'react';
+import {
+  Text, Image, Row
+} from 'native-base';
 
-const styles = StyleSheet.create({
-    appBarContainer: {
-        width: '100%',
-        backgroundColor: 'rgba(240, 240, 240, 250)',
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        height: '50px'
-    },
-    imageContainer: {
-        height: '50px',
-        width: '50px',
-    },
-    title: {
-        position: 'absolute',
-        fontSize: '18px',
-        fontFamily: 'akshar',
-        textAlign: 'center',
-        width: '100%',
-    }
-});
+function AppHeader() {
+  return (
+    <Row
+      bg="rgb(249, 250, 250)"
+      px="1"
+      py="3"
+      justifyContent="space-between"
+      alignItems="center"
+      w="100%"
+      elevation={10}
+    >
+      <Image position="absolute" source={require('../../assets/logo.png')} h={50} w={50} alt="logo" m={5} />
+      <Text flex={1} textAlign="center" fontSize="20" fontWeight="bold">
+        DeltaE+
+      </Text>
+    </Row>
+  );
+}
+
 export default AppHeader;
