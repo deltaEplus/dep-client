@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 import React from 'react';
 import {
-  Text, Image, Row
+  Text, Image, Row, StatusBar
 } from 'native-base';
 
 function AppHeader() {
@@ -15,6 +15,7 @@ function AppHeader() {
       w="100%"
       elevation={10}
     >
+      <StatusBar />
       <Image position="absolute" source={require('../../assets/logo.png')} h={50} w={50} alt="logo" m={5} />
       <Text flex={1} textAlign="center" fontSize="20" fontWeight="bold">
         DeltaE+
