@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setZipCode } from '../../redux/actions/formActions';
 import { blue, green } from '../../config/theme';
 
-const ZipCode = forwardRef((props, _ref) => {
+const ZipCode = forwardRef((_, _ref) => {
   const [error, setError] = useState(-1);
   const dispatch = useDispatch();
   const { zipCode } = useSelector((form) => form.formReducer);

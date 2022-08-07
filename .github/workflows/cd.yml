@@ -25,6 +25,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: yarn
       - name: copy config
         run: cp src/config/config.example.js src/config/config.js
@@ -48,5 +49,5 @@ jobs:
             git checkout .
             git fetch origin prod
             git reset --hard origin/prod
-            yarn install
+            yarn
             expo build:web
