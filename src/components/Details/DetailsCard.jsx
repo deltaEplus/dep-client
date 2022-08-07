@@ -29,12 +29,21 @@ const DetailsCard = () => {
           setResp(response.data);
         }
       } catch (err) {
-        toast.show({
-          title: err.response.data,
-          type: 'danger',
-          placement: 'bottom'
-        });
-        navigation.goBack();
+        if (err.response.status === 400) {
+          toast.show({
+            title: err.response.data,
+            type: 'danger',
+            placement: 'bottom'
+          });
+          navigation.goBack();
+        } else {
+          toast.show({
+            title: 'Something went wrong',
+            type: 'danger',
+            placement: 'bottom'
+          });
+          navigation.goBack();
+        }
       } finally {
         setShowLoader(false);
       }

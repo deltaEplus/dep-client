@@ -1,6 +1,6 @@
 import React from 'react';
 import DetailsCard from '../components/Details/DetailsCard';
-import ScrollHOC from '../hoc/ScrollHOC';
+import ScrollHOC from '../HOC/ScrollHOC';
 
 const Details = () => {
   const DetailsPage = ScrollHOC(DetailsCard);

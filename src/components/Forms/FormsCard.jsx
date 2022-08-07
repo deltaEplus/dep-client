@@ -7,7 +7,7 @@ import ProgressSteps, {
     Title,
     Content
 } from '@joaosousa/react-native-progress-steps';
-import FormsHOC from '../../hoc/FormsHOC';
+import FormsHOC from '../../HOC/FormsHOC';
 
 const FormsCard = () => {
     const step = useSelector(state => state.stepReducer);

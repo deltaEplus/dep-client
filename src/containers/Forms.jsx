@@ -1,5 +1,5 @@
 import React from 'react';
-import ScrollHOC from '../hoc/ScrollHOC';
+import ScrollHOC from '../HOC/ScrollHOC';
 import FormsCard from '../components/Forms/FormsCard';
 
 const Forms = () => {

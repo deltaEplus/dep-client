@@ -3,10 +3,7 @@ name: CI/CD
 on:
   push:
     branches:
-      - "main"
-  pull_request:
-    branches:
-      - "main"
+      - "prod"
 
 jobs:
   CI:
@@ -33,3 +30,23 @@ jobs:
         run: cp src/config/config.example.js src/config/config.js
       - name: Lint
         run: yarn lint
+
+  CD:
+    name: CD
+    needs: [CI]
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: wells.sailesh.software
+          port: 22
+          username: indresh
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd dep-client
+            git checkout .
+            git fetch origin prod
+            git reset --hard origin/prod
+            yarn install
+            expo build:web
