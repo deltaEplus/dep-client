@@ -37,6 +37,7 @@
           "unnamedComponents": "arrow-function"
         }
       ],
+      "default-param-last": 0,
       "linebreak-style": ["error", "unix"],
       "eol-last": ["error", "unix"],
       "comma-dangle": ["error", "never"],

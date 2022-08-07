@@ -8,7 +8,8 @@
         "ios": "expo start --ios",
         "web": "expo start --web",
         "eject": "expo eject",
-        "postinstall": "husky install"
+        "postinstall": "husky install",
+        "lint": "eslint --ignore-path .gitignore . --ext .js"
     },
     "dependencies": {
         "@joaosousa/react-native-progress-steps": "^0.4.0",
