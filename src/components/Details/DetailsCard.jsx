@@ -3,12 +3,14 @@ import {
   useToast, VStack, HStack, Divider, Box, Text, Heading
 } from 'native-base';
 import { useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 import { getWeatherDetails } from '../../requests';
 import Loader from '../Loader';
-import { rowFontSize } from '../../config/theme';
+import { blue, rowFontSize } from '../../config/theme';
 
-function DetailsCard() {
+const DetailsCard = () => {
   const [showLoader, setShowLoader] = useState(false);
+  const navigation = useNavigation();
   const toast = useToast();
   const [resp, setResp] = useState({});
   const form = useSelector((state) => state.formReducer);
@@ -32,6 +34,7 @@ function DetailsCard() {
           type: 'danger',
           placement: 'bottom'
         });
+        navigation.goBack();
       } finally {
         setShowLoader(false);
       }
@@ -45,13 +48,17 @@ function DetailsCard() {
           <Heading mb={5} mx="auto">Report</Heading>
           {Object.keys(resp).map((key) => (
             <HStack key={key} flex={1} w="100%">
-              <Divider orientation="vertical" mr="3" />
-              <Text flex={6} fontSize={rowFontSize} fontWeight={700} px={4} py={4}>{key}</Text>
+              <Divider color={blue} orientation="vertical" mr="3" />
+              <Text flex={3} fontSize={rowFontSize} fontWeight={700} px={4} py={4}>{key}</Text>
               <Box flex={1}>
-                <Divider orientation="vertical" mx={8} />
+                <Divider
+                  color={blue}
+                  orientation="vertical"
+                  mx={8}
+                />
               </Box>
-              <Text textAlign="center" flex={6} fontSize={rowFontSize} px={4} py={4}>{resp[key]}</Text>
-              <Divider orientation="vertical" ml="3" />
+              <Text flex={3} fontSize={rowFontSize} px={4} py={4}>{resp[key]}</Text>
+              <Divider color={blue} orientation="vertical" ml="3" />
             </HStack>
           ))}
           <Box />
@@ -59,6 +66,6 @@ function DetailsCard() {
       )}
     </Box>
   );
-}
+};
 
 export default DetailsCard;

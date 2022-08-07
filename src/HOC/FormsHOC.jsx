@@ -5,9 +5,10 @@ import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import { steps } from '../constants/steps';
 import { goNext, goPrev } from '../redux/actions/formActions';
+import { blue } from '../config/theme';
 
 const FormsHOC = (FormComponent) => {
-  function NewComponent({ id }) {
+  const NewComponent = ({ id }) => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
     const errorRef = useRef();
@@ -21,7 +22,7 @@ const FormsHOC = (FormComponent) => {
     };
 
     return (
-      <VStack mx="3" my="5">
+      <VStack px={5} my={5}>
         <FormComponent ref={errorRef} />
         <HStack justifyContent="space-around" space={3} mt="8">
           {id > 0 ? (
@@ -29,13 +30,13 @@ const FormsHOC = (FormComponent) => {
               Prev
             </Button>
           ) : null}
-          <Button flex={1} onPress={onNext} colorScheme="rgb(198,40,40)">
+          <Button flex={1} onPress={onNext} colorScheme={blue}>
             {id < steps.length - 1 ? 'Next' : 'Submit'}
           </Button>
         </HStack>
       </VStack>
     );
-  }
+  };
   NewComponent.propTypes = {
     id: PropTypes.number.isRequired
   };

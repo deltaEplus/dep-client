@@ -18,12 +18,14 @@ const BuildingType = forwardRef((props, _ref) => {
     <Select
       isFullWidth
       size={['sm', 'md', 'lg']}
+      p={3}
       selectedValue={buildingType}
       accessibilityLabel="Building Type"
       placeholder="Building Type"
       _selectedItem={{
         bg: 'teal.600',
-        endIcon: <CheckIcon size="5" />
+        endIcon: <CheckIcon size="5" />,
+        borderColor: 'green.400'
       }}
       mt={1}
       onValueChange={(itemValue) => dispatch(setBuildingType(itemValue))}

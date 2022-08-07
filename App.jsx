@@ -19,33 +19,29 @@ const linking = {
   }
 };
 
-function Navigation() {
-  return (
-    <NavigationContainer linking={linking}>
-      <Stack.Navigator
-        screenOptions={{ header: AppHeader }}
-      >
-        <Stack.Screen
-          name="Form"
-          component={Forms}
-        />
-        <Stack.Screen
-          name="Details"
-          component={Details}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
+const Navigation = () => (
+  <NavigationContainer linking={linking}>
+    <Stack.Navigator
+      screenOptions={{ header: AppHeader }}
+    >
+      <Stack.Screen
+        name="Form"
+        component={Forms}
+      />
+      <Stack.Screen
+        name="Details"
+        component={Details}
+      />
+    </Stack.Navigator>
+  </NavigationContainer>
+);
 
-function App() {
-  return (
-    <Provider store={Store}>
-      <NativeBaseProvider>
-        <Navigation />
-      </NativeBaseProvider>
-    </Provider>
-  );
-}
+const App = () => (
+  <Provider store={Store}>
+    <NativeBaseProvider>
+      <Navigation />
+    </NativeBaseProvider>
+  </Provider>
+);
 
 export default App;

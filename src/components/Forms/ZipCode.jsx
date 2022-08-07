@@ -1,21 +1,28 @@
-import React, { forwardRef, useState, useImperativeHandle } from 'react';
+import React, {
+  forwardRef, useState, useImperativeHandle, useEffect
+} from 'react';
 import {
   FormControl, Input
 } from 'native-base';
 import { useDispatch, useSelector } from 'react-redux';
 import { setZipCode } from '../../redux/actions/formActions';
+import { blue, green } from '../../config/theme';
 
 const ZipCode = forwardRef((props, _ref) => {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(-1);
   const dispatch = useDispatch();
   const { zipCode } = useSelector((form) => form.formReducer);
 
+  useEffect(() => {
+    if (zipCode === '') { setError(-1); } else setError(0);
+  }, []);
+
   const validate = (value) => {
     if (/^\d{5}(-\d{4})?$/.test(value)) {
-      setError(false);
+      setError(0);
       dispatch(setZipCode(value));
     } else {
-      setError(true);
+      setError(1);
     }
   };
 
@@ -24,17 +31,22 @@ const ZipCode = forwardRef((props, _ref) => {
   }));
 
   return (
-    <FormControl isRequired isInvalid={error}>
+    <FormControl isFullWidth isRequired isInvalid={error === 1}>
       <Input
-        isFullWidth
+        w="100%"
         size={['sm', 'md', 'lg']}
         placeholder="Enter Zip-Code"
         onChangeText={(value) => validate(value)}
         defaultValue={zipCode}
+        p={3}
+        borderColor={blue}
+        _focus={{
+          borderColor: green
+        }}
       />
-      {error ? (
+      {error === 1 ? (
         <FormControl.ErrorMessage>
-          Entered Zip code is InValid
+          Enter a Valid Zip-Code
         </FormControl.ErrorMessage>
       ) : (
         <FormControl.HelperText>
