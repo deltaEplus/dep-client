@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { blue, green } from '../../config/theme';
 import { setFloorArea } from '../../redux/actions/formActions';
 
-const FloorArea = forwardRef((props, _ref) => {
+const FloorArea = forwardRef((_, _ref) => {
   const [error, setError] = useState(-1);
   const dispatch = useDispatch();
   const { floorArea } = useSelector((form) => form.formReducer);
@@ -34,6 +34,7 @@ const FloorArea = forwardRef((props, _ref) => {
       <InputGroup isFullWidth>
         <Input
           flex={1}
+          size={['sm', 'md', 'lg']}
           placeholder="Enter Floor Area"
           onChangeText={(value) => validate(value)}
           defaultValue={floorArea}
@@ -56,7 +57,13 @@ const FloorArea = forwardRef((props, _ref) => {
       </InputGroup>
       {error === 1 ? (
         <FormControl.ErrorMessage>Invalid Area</FormControl.ErrorMessage>
-      ) : null}
+      )
+        : (
+          <FormControl.HelperText mt={2} ml={1}>
+            Only Numerics are allowed.
+          </FormControl.HelperText>
+        )}
+
     </FormControl>
   );
 });

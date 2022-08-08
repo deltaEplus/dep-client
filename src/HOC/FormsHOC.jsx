@@ -17,16 +17,16 @@ const FormsHOC = (FormComponent) => {
 
     const onNext = () => {
       if (id === steps.length - 1) {
-        navigation.push('Details');
+        navigation.push('Report');
       } else if (!errorRef.current.getValidation()) dispatch(goNext());
     };
 
     return (
-      <VStack px={5} my={5}>
+      <VStack px={5} my={2}>
         <FormComponent ref={errorRef} />
-        <HStack justifyContent="space-around" space={3} mt="8">
+        <HStack justifyContent="space-around" space={3} mt={6}>
           {id > 0 ? (
-            <Button flex={1} onPress={onPrev} variant="ghost">
+            <Button flex={1} onPress={onPrev} variant="outline" colorScheme={blue}>
               Prev
             </Button>
           ) : null}

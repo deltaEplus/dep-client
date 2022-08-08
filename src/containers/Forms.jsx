@@ -5,7 +5,7 @@ import FormsCard from '../components/Forms/FormsCard';
 const Forms = () => {
   const FormsPage = ScrollHOC(FormsCard);
   return (
-    <FormsPage />
+    <FormsPage p={10} bw={1} />
   );
 };
 

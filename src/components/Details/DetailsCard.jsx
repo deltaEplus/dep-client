@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import {
-  useToast, VStack, HStack, Divider, Box, Text, Heading
+  useToast, VStack, Divider, Box, Center
 } from 'native-base';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { getWeatherDetails } from '../../requests';
 import Loader from '../Loader';
-import { blue, rowFontSize } from '../../config/theme';
+import { black } from '../../config/theme';
+import TableRow from '../TableRow';
 
 const DetailsCard = () => {
   const [showLoader, setShowLoader] = useState(false);
@@ -35,14 +36,14 @@ const DetailsCard = () => {
             type: 'danger',
             placement: 'bottom'
           });
-          navigation.goBack();
+          navigation.popToTop();
         } else {
           toast.show({
             title: 'Something went wrong',
             type: 'danger',
             placement: 'bottom'
           });
-          navigation.goBack();
+          navigation.popToTop();
         }
       } finally {
         setShowLoader(false);
@@ -51,29 +52,21 @@ const DetailsCard = () => {
   }, []);
 
   return (
-    <Box>
+    <Center w="100%">
       {showLoader ? <Loader /> : (
-        <VStack divider={<Divider my="2" />} alignItems="center">
-          <Heading mb={5} mx="auto">Report</Heading>
+        <VStack w="100%" divider={<Divider bgColor={black} my="2" />} alignSelf="stretch">
+          <Box />
           {Object.keys(resp).map((key) => (
-            <HStack key={key} flex={1} w="100%">
-              <Divider color={blue} orientation="vertical" mr="3" />
-              <Text flex={3} fontSize={rowFontSize} fontWeight={700} px={4} py={4}>{key}</Text>
-              <Box flex={1}>
-                <Divider
-                  color={blue}
-                  orientation="vertical"
-                  mx={8}
-                />
-              </Box>
-              <Text flex={3} fontSize={rowFontSize} px={4} py={4}>{resp[key]}</Text>
-              <Divider color={blue} orientation="vertical" ml="3" />
-            </HStack>
+            <TableRow
+              key={key}
+              title={key}
+              value={resp[key]}
+            />
           ))}
           <Box />
         </VStack>
       )}
-    </Box>
+    </Center>
   );
 };
 

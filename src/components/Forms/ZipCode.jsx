@@ -49,8 +49,8 @@ const ZipCode = forwardRef((_, _ref) => {
           Enter a Valid Zip-Code
         </FormControl.ErrorMessage>
       ) : (
-        <FormControl.HelperText>
-          Only US zip-codes Are Accepted.
+        <FormControl.HelperText mt={2} ml={1}>
+          Only US zip-codes are accepted.
         </FormControl.HelperText>
       )}
     </FormControl>

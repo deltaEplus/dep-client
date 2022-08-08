@@ -8,7 +8,7 @@ const Details = () => {
   const DetailsPage = ScrollHOC(DetailsCard);
   return (
     <Suspense fallback={<Loader />}>
-      <DetailsPage />
+      <DetailsPage p={0} bw={0} />
     </Suspense>
   );
 };

@@ -1,32 +1,30 @@
 import React, { forwardRef } from 'react';
 import {
-  Text,
-  HStack,
   Divider,
   VStack,
+  View,
   Box
 } from 'native-base';
 import { useSelector } from 'react-redux';
-import { rowFontSize, blue } from '../../config/theme';
+import { black } from '../../config/theme';
+import TableRow from '../TableRow';
 
 const Complete = forwardRef(() => {
   const form = useSelector((state) => state.formReducer);
 
   return (
-    <VStack divider={<Divider color={blue} my="2" />} alignItems="center">
-      <Box />
+    <VStack divider={<Divider bgColor={black} />} alignSelf="stretch">
+      <View />
       {Object.keys(form).map((key) => (
-        <HStack key={key} alignSelf="stretch" h="39">
-          <Divider color={blue} orientation="vertical" mr="3" />
-          <Text textAlign="center" fontSize={rowFontSize} fontWeight={700} flex={3} py="2">{key}</Text>
-          <Box flex={1}>
-            <Divider color={blue} orientation="vertical" mx="3" />
-          </Box>
-          <Text fontSize={rowFontSize} flex={3} py="2">{form[key]}</Text>
-          <Divider color={blue} orientation="vertical" ml="3" />
-        </HStack>
+        <Box>
+          <TableRow
+            key={key}
+            title={key.charAt(0).toUpperCase() + key.slice(1)}
+            value={form[key]}
+          />
+        </Box>
       ))}
-      <Box />
+      <View />
     </VStack>
   );
 });
