@@ -51,7 +51,7 @@ const FloorArea = forwardRef((_, _ref) => {
           p={3}
         >
           <Text color="white">
-            m^2
+            sq.ft
           </Text>
         </InputRightAddon>
       </InputGroup>
