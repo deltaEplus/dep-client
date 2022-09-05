@@ -28,6 +28,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: yarn
       - name: copy config
         run: cp src/config/config.example.js src/config/config.js

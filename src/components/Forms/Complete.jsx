@@ -16,9 +16,8 @@ const Complete = forwardRef(() => {
     <VStack divider={<Divider bgColor={black} />} alignSelf="stretch">
       <View />
       {Object.keys(form).map((key) => (
-        <Box>
+        <Box key={key}>
           <TableRow
-            key={key}
             title={key.charAt(0).toUpperCase() + key.slice(1)}
             value={form[key]}
           />

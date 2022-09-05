@@ -14,9 +14,7 @@
         "updates": {
             "fallbackToCacheTimeout": 0
         },
-        "assetBundlePatterns": [
-            "**/*"
-        ],
+        "assetBundlePatterns": ["**/*"],
         "ios": {
             "supportsTablet": true,
             "bundleIdentifier": "edu.nitt.dep"
@@ -26,8 +24,7 @@
                 "foregroundImage": "./assets/logo.png",
                 "backgroundColor": "#FFFFFF"
             },
-            "package": "edu.nitt.dep",
-            "enableProguardInReleaseBuilds": true
+            "package": "edu.nitt.dep"
         },
         "web": {
             "favicon": "./assets/logo.png"

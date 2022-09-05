@@ -51,21 +51,19 @@ const DetailsCard = () => {
     }());
   }, []);
 
-  return (
+  return showLoader ? <Loader /> : (
     <Center w="100%">
-      {showLoader ? <Loader /> : (
-        <VStack w="100%" divider={<Divider bgColor={black} my="2" />} alignSelf="stretch">
-          <Box />
-          {Object.keys(resp).map((key) => (
-            <TableRow
-              key={key}
-              title={key}
-              value={resp[key]}
-            />
-          ))}
-          <Box />
-        </VStack>
-      )}
+      <VStack w="100%" divider={<Divider bgColor={black} my="2" />} alignSelf="stretch">
+        <Box />
+        {Object.keys(resp).map((key) => (
+          <TableRow
+            key={key}
+            title={key}
+            value={resp[key]}
+          />
+        ))}
+        <Box />
+      </VStack>
     </Center>
   );
 };

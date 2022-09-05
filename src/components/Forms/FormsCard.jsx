@@ -18,6 +18,7 @@ const FormsCard = () => {
           const StepComponent = FormsHOC(value.content);
           return {
             id: index + 1,
+            key: index,
             title: (<Title>{value.title}</Title>),
             content: (
               <Content>

@@ -26,7 +26,7 @@ export const stepsColors = {
 };
 
 export const rowFontSize = {
-  base: '9',
+  base: '10',
   sm: '10',
   md: '12',
   lg: '14',

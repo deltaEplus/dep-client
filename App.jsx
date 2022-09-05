@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { NativeBaseProvider } from 'native-base';
+import { Center, NativeBaseProvider } from 'native-base';
 import { Provider } from 'react-redux';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -33,7 +33,7 @@ const navTheme = {
 };
 
 const Navigation = () => (
-  <Suspense fallback={<Loader />}>
+  <Suspense fallback={<Center h="100%"><Loader /></Center>}>
     <ImageBackground
       style={{ width: '100%', height: '100%', resizeMode: 'cover' }}
       source={bg}
