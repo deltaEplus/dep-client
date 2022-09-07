@@ -1,5 +1,5 @@
 import {
-  PREV, NEXT, FLOOR_AREA, BUILDING_TYPE, ZIP_CODE
+  PREV, NEXT, FLOOR_AREA, BUILDING_TYPE, ZIP_CODE, ENERGY_COST
 } from '../actions/formActions';
 
 const initialStep = 0;
@@ -7,7 +7,8 @@ const initialStep = 0;
 const initialForm = {
   zipCode: '',
   floorArea: '',
-  buildingType: ''
+  buildingType: '',
+  energyCost: ''
 };
 
 export function formReducer(form = initialForm, action) {
@@ -18,6 +19,8 @@ export function formReducer(form = initialForm, action) {
       return { ...form, floorArea: action.payload };
     case BUILDING_TYPE:
       return { ...form, buildingType: action.payload };
+    case ENERGY_COST:
+      return { ...form, energyCost: action.payload };
     default:
       return form;
   }

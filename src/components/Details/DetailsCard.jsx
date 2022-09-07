@@ -22,7 +22,8 @@ const DetailsCard = () => {
       const data = {
         zipCode: form.zipCode,
         floorArea: form.floorArea,
-        buildingType: form.buildingType
+        buildingType: form.buildingType,
+        energyCost: form.energyCost
       };
       try {
         const response = await getWeatherDetails(data);
