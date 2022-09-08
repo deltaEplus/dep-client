@@ -18,7 +18,7 @@ const Complete = forwardRef(() => {
       {Object.keys(form).map((key) => (
         <Box key={key}>
           <TableRow
-            title={key.charAt(0).toUpperCase() + key.slice(1)}
+            title={key === 'energyCost' ? 'Annual Energy Cost' : key.charAt(0).toUpperCase() + key.slice(1)}
             value={form[key]}
           />
         </Box>

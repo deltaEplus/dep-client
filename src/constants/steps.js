@@ -17,7 +17,7 @@ export const steps = [{
   content: BuildingType
 },
 {
-  title: 'Energy Cost',
+  title: 'Annual Energy Cost',
   content: EnergyCost
 },
 {

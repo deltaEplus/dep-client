@@ -14,9 +14,9 @@ const EnergyCost = forwardRef((_, _ref) => {
   const { energyCost } = useSelector((form) => form.formReducer);
 
   const validate = (value) => {
-    if (/^[0-9]*.?[0-9]+$/.test(value)) {
+    if (/^[0-9,]*.?[0-9]+$/.test(value)) {
       setError(0);
-      dispatch(setEnergyCost(value));
+      dispatch(setEnergyCost(value.replaceAll(',', '')));
     } else {
       setError(1);
     }
@@ -35,7 +35,7 @@ const EnergyCost = forwardRef((_, _ref) => {
         <Input
           flex={1}
           size={['sm', 'md', 'lg']}
-          placeholder="Enter Energy Cost"
+          placeholder="Enter Annual Energy Cost"
           onChangeText={(value) => validate(value)}
           defaultValue={energyCost}
           p={3}

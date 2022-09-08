@@ -14,9 +14,9 @@ const FloorArea = forwardRef((_, _ref) => {
   const { floorArea } = useSelector((form) => form.formReducer);
 
   const validate = (value) => {
-    if (/^[0-9]*.?[0-9]+$/.test(value)) {
+    if (/^[0-9,]*.?[0-9]+$/.test(value)) {
       setError(0);
-      dispatch(setFloorArea(value));
+      dispatch(setFloorArea(value.replaceAll(',', '')));
     } else {
       setError(1);
     }
