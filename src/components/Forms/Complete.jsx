@@ -19,7 +19,8 @@ const Complete = forwardRef(() => {
         <Box key={key}>
           <TableRow
             title={key === 'energyCost' ? 'Annual Energy Cost' : key.charAt(0).toUpperCase() + key.slice(1)}
-            value={form[key]}
+            // eslint-disable-next-line no-nested-ternary
+            value={key === 'floorArea' ? `${new Intl.NumberFormat('en-US').format(form[key])} sq.ft` : key === 'energyCost' ? `$ ${new Intl.NumberFormat('en-US').format(form[key])}` : form[key]}
           />
         </Box>
       ))}

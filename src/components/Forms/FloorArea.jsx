@@ -14,7 +14,7 @@ const FloorArea = forwardRef((_, _ref) => {
   const { floorArea } = useSelector((form) => form.formReducer);
 
   const validate = (value) => {
-    if (/^[0-9,]*.?[0-9]+$/.test(value)) {
+    if (/^[0-9,]*$/.test(value)) {
       setError(0);
       dispatch(setFloorArea(value.replaceAll(',', '')));
     } else {
@@ -38,6 +38,7 @@ const FloorArea = forwardRef((_, _ref) => {
           placeholder="Enter Floor Area"
           onChangeText={(value) => validate(value)}
           defaultValue={floorArea}
+          value={new Intl.NumberFormat('en-US').format(floorArea)}
           p={3}
           borderColor={blue}
           _focus={{

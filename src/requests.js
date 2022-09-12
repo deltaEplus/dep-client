@@ -5,7 +5,7 @@ export const getWeatherDetails = ({
   zipCode, floorArea, buildingType, energyCost
 }) => axios.post(WEATHER_URL, {
   zipcode: zipCode,
-  area: floorArea,
+  area: floorArea.replaceAll(',', ''),
   building_type: buildingType,
-  energy_cost: energyCost
+  energy_cost: energyCost.replaceAll(',', '')
 });
