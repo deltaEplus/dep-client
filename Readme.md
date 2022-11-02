@@ -18,3 +18,11 @@ React-Native Application for ΔE+
     ```
     yarn start
     ```
+* To build as PWA
+    ```
+    expo build:web
+    ```    
+* To run as PWA
+    ```
+    npx serve web-build
+    ```

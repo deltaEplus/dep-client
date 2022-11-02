@@ -40,9 +40,9 @@ jobs:
       - name: deploy
         uses: appleboy/ssh-action@master
         with:
-          host: wells.sailesh.software
+          host: ${{ secrets.SSH_HOST }}
           port: 22
-          username: indresh
+          username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd dep-client
@@ -51,3 +51,4 @@ jobs:
             git reset --hard origin/prod
             yarn
             expo build:web
+            npx serve web-build

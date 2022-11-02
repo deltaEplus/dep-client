@@ -1,6 +1,6 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable prefer-regex-literals */
 /* eslint-disable no-restricted-globals */
-/* eslint no-underscore-dangle: 0 */
 
 // This service worker can be customized!
 // See https://developers.google.com/web/tools/workbox/modules

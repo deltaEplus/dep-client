@@ -4,10 +4,10 @@ import { Provider } from 'react-redux';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ImageBackground } from 'react-native';
+import * as serviceWorkerRegistration from './src/serviceWorkerRegistration';
 import Store from './src/redux/store';
 import Loader from './src/components/Loader';
 import AppHeader from './src/components/Header';
-import * as serviceWorker from './serviceWorker';
 
 const bg = require('./assets/bg.jpg');
 
@@ -67,4 +67,4 @@ const App = () => (
 
 export default App;
 
-serviceWorker.register();
+serviceWorkerRegistration.register();
