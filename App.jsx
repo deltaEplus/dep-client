@@ -7,6 +7,7 @@ import { ImageBackground } from 'react-native';
 import Store from './src/redux/store';
 import Loader from './src/components/Loader';
 import AppHeader from './src/components/Header';
+import * as serviceWorker from './serviceWorker';
 
 const bg = require('./assets/bg.jpg');
 
@@ -65,3 +66,5 @@ const App = () => (
 );
 
 export default App;
+
+serviceWorker.register();
