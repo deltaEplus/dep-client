@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import {
-  useToast, VStack, Divider, Box, Center
+  useToast, VStack, Divider, Box, Center, Button
 } from 'native-base';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { getWeatherDetails } from '../../requests';
 import Loader from '../Loader';
-import { black } from '../../config/theme';
+import { black, blue } from '../../config/theme';
 import TableRow from '../TableRow';
 
 const DetailsCard = () => {
@@ -54,7 +54,11 @@ const DetailsCard = () => {
 
   return showLoader ? <Loader /> : (
     <Center w="100%">
-      <VStack w="100%" divider={<Divider bgColor={black} my="2" />} alignSelf="stretch">
+      <VStack
+        w="100%"
+        divider={<Divider bgColor={black} my="2" />}
+        alignSelf="stretch"
+      >
         <Box />
         {Object.keys(resp).map((key) => (
           <TableRow
@@ -64,7 +68,16 @@ const DetailsCard = () => {
           />
         ))}
         <Box />
+        <Center marginY={3}>
+          <Button
+            colorScheme={blue}
+            onPress={() => navigation.popToTop()}
+          >
+            Go To Home
+          </Button>
+        </Center>
       </VStack>
+
     </Center>
   );
 };

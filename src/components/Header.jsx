@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { bgColor } from '../config/theme';
 
 const logo = require('../../assets/logo.png');
+// const arrow = require('../../assets/arrow.png');
 
 const AppHeader = ({ route }) => (
   <Row
@@ -19,6 +20,7 @@ const AppHeader = ({ route }) => (
   >
     <StatusBar />
     <Image position="absolute" source={logo} h={50} w={50} alt="logo" m={5} />
+
     <Text flex={1} textAlign="center" fontSize="20" fontWeight="bold">
       {route.name}
     </Text>
