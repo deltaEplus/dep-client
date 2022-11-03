@@ -1,51 +1,47 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import {
   useToast, VStack, Divider, Box, Center, Button
 } from 'native-base';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { getWeatherDetails } from '../../requests';
+import { getImageDetails, getWeatherDetails } from '../../requests';
 import Loader from '../Loader';
 import { black, blue } from '../../config/theme';
 import TableRow from '../TableRow';
 
-const DetailsCard = () => {
+const DetailsCard = ({ route }) => {
   const [showLoader, setShowLoader] = useState(false);
-  const navigation = useNavigation();
   const toast = useToast();
+  const navigation = useNavigation();
   const [resp, setResp] = useState({});
   const form = useSelector((state) => state.formReducer);
 
   useEffect(() => {
     (async function fetch() {
       setShowLoader(true);
-      const data = {
-        zipCode: form.zipCode,
-        floorArea: form.floorArea,
-        buildingType: form.buildingType,
-        energyCost: form.energyCost
-      };
       try {
-        const response = await getWeatherDetails(data);
-        if (response.status === 200) {
-          setResp(response.data);
+        let response;
+        if (route !== null && route.params.itemId !== undefined) {
+          response = await getImageDetails(JSON.stringify(route.params.itemId));
+        } else {
+          const data = {
+            zipCode: form.zipCode,
+            floorArea: form.floorArea,
+            buildingType: form.buildingType,
+            energyCost: form.energyCost
+          };
+          response = await getWeatherDetails(data);
+          if (response.status === 200) {
+            setResp(response.data);
+          }
         }
       } catch (err) {
-        if (err.response.status === 400) {
-          toast.show({
-            title: err.response.data,
-            type: 'danger',
-            placement: 'bottom'
-          });
-          navigation.popToTop();
-        } else {
-          toast.show({
-            title: 'Something went wrong',
-            type: 'danger',
-            placement: 'bottom'
-          });
-          navigation.popToTop();
-        }
+        toast.show({
+          title: 'Something went wrong',
+          type: 'danger',
+          placement: 'bottom'
+        });
       } finally {
         setShowLoader(false);
       }
@@ -56,6 +52,8 @@ const DetailsCard = () => {
     <Center w="100%">
       <VStack
         w="100%"
+        px={10}
+        my={5}
         divider={<Divider bgColor={black} my="2" />}
         alignSelf="stretch"
       >
@@ -68,16 +66,16 @@ const DetailsCard = () => {
           />
         ))}
         <Box />
-        <Center marginY={3}>
-          <Button
-            colorScheme={blue}
-            onPress={() => navigation.popToTop()}
-          >
-            Go To Home
-          </Button>
-        </Center>
-      </VStack>
 
+      </VStack>
+      <Center marginY={3}>
+        <Button
+          colorScheme={blue}
+          onPress={() => navigation.popToTop()}
+        >
+          Go To Home
+        </Button>
+      </Center>
     </Center>
   );
 };

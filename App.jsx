@@ -8,6 +8,7 @@ import * as serviceWorkerRegistration from './src/serviceWorkerRegistration';
 import Store from './src/redux/store';
 import Loader from './src/components/Loader';
 import AppHeader from './src/components/Header';
+import Processor from './src/containers/Processor';
 
 const bg = require('./assets/bg.jpg');
 
@@ -20,7 +21,8 @@ const linking = {
   config: {
     screens: {
       'DeltaE+': '',
-      Report: 'report'
+      Report: 'report',
+      ImageProcessor: 'imageprocessor'
     }
   }
 };
@@ -50,6 +52,10 @@ const Navigation = () => (
           <Stack.Screen
             name="Report"
             component={Details}
+          />
+          <Stack.Screen
+            name="ImageProcessor"
+            component={Processor}
           />
         </Stack.Navigator>
       </NavigationContainer>

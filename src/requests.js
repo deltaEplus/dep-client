@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { WEATHER_URL } from './constants/urls';
+import { BMS_URL, WEATHER_URL } from './constants/urls';
 
 export const getWeatherDetails = ({
   zipCode, floorArea, buildingType, energyCost
@@ -8,4 +8,10 @@ export const getWeatherDetails = ({
   area: floorArea.replaceAll(',', ''),
   building_type: buildingType,
   energy_cost: energyCost.replaceAll(',', '')
+});
+
+export const getImageDetails = ({
+  imageUrl
+}) => axios.post(BMS_URL, {
+  image: imageUrl
 });
