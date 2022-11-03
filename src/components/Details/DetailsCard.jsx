@@ -23,7 +23,7 @@ const DetailsCard = ({ route }) => {
       try {
         let response;
         if (route !== null && route.params.itemId !== undefined) {
-          response = await getImageDetails(JSON.stringify(route.params.itemId));
+          response = await getImageDetails(JSON.stringify(route.params.itemId.split('base64,')[1]));
         } else {
           const data = {
             zipCode: form.zipCode,

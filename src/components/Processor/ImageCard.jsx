@@ -22,6 +22,7 @@ const ImageCard = () => {
     });
 
     if (!result.cancelled) {
+    //   console.log(result.uri.split('base64,')[1]);
       setImage(result.uri);
     }
   };
