@@ -1,3 +1,4 @@
+/* eslint-disable  */
 import axios from 'axios';
 import { BMS_URL, WEATHER_URL } from './constants/urls';
 
@@ -13,5 +14,5 @@ export const getWeatherDetails = ({
 export const getImageDetails = ({
   imageUrl
 }) => axios.post(BMS_URL, {
-  image: imageUrl
+  img: imageUrl
 });

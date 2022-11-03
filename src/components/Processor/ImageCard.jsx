@@ -43,7 +43,7 @@ const ImageCard = () => {
 
       <Button
         isDisabled={image === upload}
-        onPress={() => navigation.push('Report', { ItemId: image })}
+        onPress={() => navigation.navigate('Report', { ItemId: image })}
         w={200}
         marginTop={10}
         colorScheme={blue}

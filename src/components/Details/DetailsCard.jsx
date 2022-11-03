@@ -10,7 +10,7 @@ import Loader from '../Loader';
 import { black, blue } from '../../config/theme';
 import TableRow from '../TableRow';
 
-const DetailsCard = ({ route }) => {
+const DetailsCard = () => {
   const [showLoader, setShowLoader] = useState(false);
   const toast = useToast();
   const navigation = useNavigation();
@@ -22,8 +22,12 @@ const DetailsCard = ({ route }) => {
       setShowLoader(true);
       try {
         let response;
-        if (route !== null && route.params.itemId !== undefined) {
-          response = await getImageDetails(JSON.stringify(route.params.itemId.split('base64,')[1]));
+        if (navigation.route.params !== null && navigation.route.params.ItemID !== null) {
+          const base64url = JSON.stringify(navigation.route.params.ItemID.split('base64,')[1]);
+          response = await getImageDetails({ imageUrl: base64url });
+          if (response.status === 200) {
+            setResp(response.data);
+          }
         } else {
           const data = {
             zipCode: form.zipCode,
