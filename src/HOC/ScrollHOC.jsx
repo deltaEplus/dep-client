@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ScrollView, Center, KeyboardAvoidingView } from 'native-base';

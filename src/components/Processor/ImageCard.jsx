@@ -3,15 +3,18 @@ import {
   Button, Image, Box
 } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import { TouchableHighlight } from 'react-native';
 import { blue } from '../../config/theme';
+import { setIMG } from '../../redux/actions/imageActions';
 
 const upload = require('../../../assets/Upload.png');
 
 const ImageCard = () => {
   const [image, setImage] = useState(upload);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -23,6 +26,7 @@ const ImageCard = () => {
 
     if (!result.cancelled) {
     //   console.log(result.uri.split('base64,')[1]);
+      dispatch(setIMG(result.uri));
       setImage(result.uri);
     }
   };
@@ -43,7 +47,9 @@ const ImageCard = () => {
 
       <Button
         isDisabled={image === upload}
-        onPress={() => navigation.navigate('Report', { ItemId: image })}
+        onPress={() => {
+          navigation.push('Report');
+        }}
         w={200}
         marginTop={10}
         colorScheme={blue}

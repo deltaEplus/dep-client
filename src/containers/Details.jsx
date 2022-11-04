@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { lazy, Suspense } from 'react';
 import Loader from '../components/Loader';
 import ScrollHOC from '../HOC/ScrollHOC';

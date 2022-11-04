@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import {
   useToast, VStack, Divider, Box, Center, Button
 } from 'native-base';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import { setIMG } from '../../redux/actions/imageActions';
 import { getImageDetails, getWeatherDetails } from '../../requests';
 import Loader from '../Loader';
 import { black, blue } from '../../config/theme';
@@ -14,20 +16,20 @@ const DetailsCard = () => {
   const [showLoader, setShowLoader] = useState(false);
   const toast = useToast();
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [resp, setResp] = useState({});
   const form = useSelector((state) => state.formReducer);
+  const image = useSelector((state) => state.imageReducer);
 
   useEffect(() => {
     (async function fetch() {
       setShowLoader(true);
       try {
         let response;
-        if (navigation.route.params !== null && navigation.route.params.ItemID !== null) {
-          const base64url = JSON.stringify(navigation.route.params.ItemID.split('base64,')[1]);
+        const { img } = image;
+        if (img !== '') {
+          const base64url = JSON.stringify(img.split('base64,')[1]);
           response = await getImageDetails({ imageUrl: base64url });
-          if (response.status === 200) {
-            setResp(response.data);
-          }
         } else {
           const data = {
             zipCode: form.zipCode,
@@ -42,7 +44,7 @@ const DetailsCard = () => {
         }
       } catch (err) {
         toast.show({
-          title: 'Something went wrong',
+          title: err,
           type: 'danger',
           placement: 'bottom'
         });
@@ -50,6 +52,7 @@ const DetailsCard = () => {
         setShowLoader(false);
       }
     }());
+    return () => dispatch(setIMG(''));
   }, []);
 
   return showLoader ? <Loader /> : (
@@ -75,7 +78,9 @@ const DetailsCard = () => {
       <Center marginY={3}>
         <Button
           colorScheme={blue}
-          onPress={() => navigation.popToTop()}
+          onPress={() => {
+            navigation.popToTop();
+          }}
         >
           Go To Home
         </Button>
