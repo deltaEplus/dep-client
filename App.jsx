@@ -46,6 +46,10 @@ const Navigation = () => (
           screenOptions={{ header: AppHeader }}
         >
           <Stack.Screen
+            name="ImageProcessor"
+            component={Processor}
+          />
+          <Stack.Screen
             name="DeltaE+"
             component={Forms}
           />
@@ -53,10 +57,7 @@ const Navigation = () => (
             name="Report"
             component={Details}
           />
-          <Stack.Screen
-            name="ImageProcessor"
-            component={Processor}
-          />
+
         </Stack.Navigator>
       </NavigationContainer>
     </ImageBackground>

@@ -2,62 +2,90 @@ import React, { useState } from 'react';
 import {
   Button, Image, Box
 } from 'native-base';
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import { TouchableHighlight } from 'react-native';
 import { blue } from '../../config/theme';
-import { setIMG } from '../../redux/actions/imageActions';
+import Loader from '../Loader';
+import { getImageDetails } from '../../requests';
 
 const upload = require('../../../assets/Upload.png');
 
 const ImageCard = () => {
-  const [image, setImage] = useState(upload);
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
+  const [image, setImage] = useState(null);
+  const [showLoader, setShowLoader] = useState(false);
+
+  const dataURItoBlob = (dataURI, name) => {
+    let byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0) { byteString = atob(dataURI.split(',')[1]); } else { byteString = unescape(dataURI.split(',')[1]); }
+    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    const ia = new Uint8Array(byteString.length);
+    for (let i = 0; i < byteString.length; i += 1) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ia], { name, type: mimeString });
+  };
+
+  const fetchCSV = async () => {
+    setShowLoader(true);
+    const formdata = new FormData();
+    const d = new Date();
+    const dformat = `${d.getHours()}-${d.getMinutes()}-${d.getSeconds()}`;
+    const name = `BMS_${dformat}.csv`;
+    formdata.append('file', dataURItoBlob(image.uri, name));
+    const res = await getImageDetails({ form: formdata });
+    const contentType = 'text/csv';
+    const csvFile = new Blob([res.data], { name, type: contentType });
+    const a = document.createElement('a');
+    a.download = name;
+    a.href = window.URL.createObjectURL(csvFile);
+    a.dataset.downloadurl = [contentType, a.download, a.href].join(':');
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    setShowLoader(false);
+  };
 
   const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       quality: 1
     });
 
     if (!result.cancelled) {
-    //   console.log(result.uri.split('base64,')[1]);
-      dispatch(setIMG(result.uri));
-      setImage(result.uri);
+      setImage(result);
     }
   };
 
   return (
-    <Box alignItems="center" justifyContent="center">
+    <form>
+      <Box alignItems="center" justifyContent="center">
 
-      <TouchableHighlight onPress={pickImage}>
+        <TouchableHighlight onPress={pickImage}>
 
-        <Image
-          source={{ uri: image === null ? upload : image }}
-          w={300}
-          h={300}
-          resizeMode="stretch"
-        />
+          <Image
+            source={{ uri: image === null ? upload : image.uri }}
+            w={300}
+            h={300}
+            resizeMode="stretch"
+          />
 
-      </TouchableHighlight>
+        </TouchableHighlight>
 
-      <Button
-        isDisabled={image === upload}
-        onPress={() => {
-          navigation.push('Report');
-        }}
-        w={200}
-        marginTop={10}
-        colorScheme={blue}
-      >
-        Upload
-      </Button>
+        {showLoader ? <Loader /> : (
+          <Button
+            isDisabled={image !== null && image.uri === upload}
+            onPress={fetchCSV}
+            w={200}
+            marginTop={10}
+            colorScheme={blue}
+          >
+            Upload
+          </Button>
+        )}
 
-    </Box>
+      </Box>
+    </form>
   );
 };
 

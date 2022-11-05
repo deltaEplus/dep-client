@@ -1,4 +1,4 @@
-/* eslint-disable  */
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import { BMS_URL, WEATHER_URL } from './constants/urls';
 
@@ -12,7 +12,11 @@ export const getWeatherDetails = ({
 });
 
 export const getImageDetails = ({
-  imageUrl
-}) => axios.post(BMS_URL, {
-  img: imageUrl
+  form
+}) => axios.post(BMS_URL, form, {
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'multipart/form-data'
+  }
+
 });

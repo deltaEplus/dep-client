@@ -7,7 +7,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { setIMG } from '../../redux/actions/imageActions';
-import { getImageDetails, getWeatherDetails } from '../../requests';
+import { getWeatherDetails } from '../../requests';
 import Loader from '../Loader';
 import { black, blue } from '../../config/theme';
 import TableRow from '../TableRow';
@@ -19,28 +19,20 @@ const DetailsCard = () => {
   const dispatch = useDispatch();
   const [resp, setResp] = useState({});
   const form = useSelector((state) => state.formReducer);
-  const image = useSelector((state) => state.imageReducer);
 
   useEffect(() => {
     (async function fetch() {
       setShowLoader(true);
       try {
-        let response;
-        const { img } = image;
-        if (img !== '') {
-          const base64url = JSON.stringify(img.split('base64,')[1]);
-          response = await getImageDetails({ imageUrl: base64url });
-        } else {
-          const data = {
-            zipCode: form.zipCode,
-            floorArea: form.floorArea,
-            buildingType: form.buildingType,
-            energyCost: form.energyCost
-          };
-          response = await getWeatherDetails(data);
-          if (response.status === 200) {
-            setResp(response.data);
-          }
+        const data = {
+          zipCode: form.zipCode,
+          floorArea: form.floorArea,
+          buildingType: form.buildingType,
+          energyCost: form.energyCost
+        };
+        const response = await getWeatherDetails(data);
+        if (response.status === 200) {
+          setResp(response.data);
         }
       } catch (err) {
         toast.show({
