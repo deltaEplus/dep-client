@@ -2,7 +2,7 @@ import {
   FormControl, Input, InputGroup, Box
 } from 'native-base';
 import React, {
-  forwardRef, useState, useImperativeHandle
+  forwardRef, useState, useImperativeHandle, useEffect
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { blue, green } from '../../config/theme';
@@ -42,6 +42,16 @@ const UserDetails = forwardRef((_, _ref) => {
       }
     }
   ];
+  useEffect(() => {
+    let isUnFilled = false;
+    for (let s = 0; s < fields.length; s += 1) {
+      if (fields[s].key === '') {
+        isUnFilled = true;
+        break;
+      }
+    }
+    if (isUnFilled) { setError(-1); } else setError(0);
+  }, []);
 
   useImperativeHandle(_ref, () => ({
     getValidation: () => error
