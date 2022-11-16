@@ -19,6 +19,7 @@ const DetailsCard = () => {
   const dispatch = useDispatch();
   const [resp, setResp] = useState({});
   const form = useSelector((state) => state.formReducer);
+  const user = useSelector((state) => state.userReducer);
 
   useEffect(() => {
     (async function fetch() {
@@ -28,7 +29,12 @@ const DetailsCard = () => {
           zipCode: form.zipCode,
           floorArea: form.floorArea,
           buildingType: form.buildingType,
-          energyCost: form.energyCost
+          energyCost: form.energyCost,
+          userDetails: {
+            mail: user.mail,
+            title: user.title,
+            company: user.company
+          }
         };
         const response = await getWeatherDetails(data);
         if (response.status === 200) {

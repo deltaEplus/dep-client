@@ -1,5 +1,5 @@
 import {
-  PREV, NEXT, FLOOR_AREA, BUILDING_TYPE, ZIP_CODE, ENERGY_COST
+  PREV, NEXT, FLOOR_AREA, BUILDING_TYPE, ZIP_CODE, ENERGY_COST, MAIL, COMPANY, TITLE
 } from '../actions/formActions';
 
 const initialStep = 0;
@@ -9,6 +9,12 @@ const initialForm = {
   floorArea: '',
   buildingType: '',
   energyCost: ''
+};
+
+const intialUser = {
+  mail: '',
+  company: '',
+  title: ''
 };
 
 export function formReducer(form = initialForm, action) {
@@ -23,6 +29,18 @@ export function formReducer(form = initialForm, action) {
       return { ...form, energyCost: action.payload };
     default:
       return form;
+  }
+}
+export function userReducer(user = intialUser, action) {
+  switch (action.type) {
+    case MAIL:
+      return { ...user, mail: action.payload };
+    case TITLE:
+      return { ...user, title: action.payload };
+    case COMPANY:
+      return { ...user, company: action.payload };
+    default:
+      return user;
   }
 }
 

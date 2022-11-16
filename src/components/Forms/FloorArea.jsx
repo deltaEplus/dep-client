@@ -37,7 +37,6 @@ const FloorArea = forwardRef((_, _ref) => {
           size={['sm', 'md', 'lg']}
           placeholder="Enter Floor Area"
           onChangeText={(value) => validate(value)}
-          defaultValue={floorArea}
           value={new Intl.NumberFormat('en-US').format(floorArea)}
           p={3}
           borderColor={blue}
