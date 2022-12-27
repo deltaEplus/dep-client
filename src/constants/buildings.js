@@ -3,6 +3,5 @@ export const BUILDING_TYPES = [
   'Hotel',
   'University/College',
   'Office',
-  'Data Center',
   'Mall'
 ];
